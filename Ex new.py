@@ -6,10 +6,10 @@ import numpy as np
 import mediapipe as mp
 
 # Constants
-SCREEN_WIDTH = 600
-SCREEN_HEIGHT = 650
-CAMERA_WIDTH = 600  # Width of the camera feed on the side
-CAMERA_HEIGHT = 500  # Same height as game screen
+SCREEN_WIDTH = 580
+SCREEN_HEIGHT = 620
+CAMERA_WIDTH = 640  # Width of the camera feed on the side
+CAMERA_HEIGHT = 505  # Same height as game screen
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 RED = (255, 0, 0)
@@ -18,12 +18,12 @@ GREEN = (0, 255, 0)
 # Initialize pygame
 pygame.init()
 screen = pygame.display.set_mode((SCREEN_WIDTH + CAMERA_WIDTH, SCREEN_HEIGHT))  # Increased width for camera
-pygame.display.set_caption("Endless Weight Loss JouEndlrney - Hand Control")
+pygame.display.set_caption("Extraordinary wukong - Hand Control")
 pygame.mixer.init()
 
 # Load resources (images) once during initialization
 player_image = pygame.image.load("player.png")  # Player sprite
-player_image = pygame.transform.scale(player_image, (115, 115))  # Scale player image
+player_image = pygame.transform.scale(player_image, (115, 120))  # Scale player image
 
 background_image = pygame.image.load("background.png")  # Background image
 background_image = pygame.transform.scale(background_image, (SCREEN_WIDTH, SCREEN_HEIGHT))  # Scale to fit screen
@@ -327,7 +327,7 @@ while True:
 
             # Horizontal movement
             player_x += player_velocity_x
-            player_x = max(0, min(SCREEN_WIDTH - 90, player_x))  # Keep player within bounds
+            player_x = max(0, min(SCREEN_WIDTH - 100, player_x))  # Keep player within bounds
 
             # Spawn obstacles at controlled intervals using time tracking
             if pygame.time.get_ticks() - obstacle_spawn_time > 1600:  # Spawn every 1 second
@@ -343,7 +343,7 @@ while True:
                 obstacle['rect'].y += obstacle['speed']
 
                 # Efficient collision detection using the bounding box
-                if obstacle['rect'].colliderect(pygame.Rect(player_x, player_y, 70, 70)):
+                if obstacle['rect'].colliderect(pygame.Rect(player_x + 50, player_y, 70, 70)):
                     if obstacle['color'] == RED:
                         lives -= 1  # Red obstacle collision
                         collision_sound.play()  # Play collision sound
